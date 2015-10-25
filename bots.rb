@@ -44,8 +44,10 @@ class MyBot < Ebooks::Bot
 
   def on_timeline(tweet)
     model = Ebooks::Model.load("model/tweets.model")
-    text = model.make_response(tweet.text, 130)
-    reply(tweet, meta(tweet).reply_prefix + text)
+    unless tweet.text.include?("@") # we don't want to take part at other conversations
+      text = model.make_response(tweet.text, 130)
+      reply(tweet, meta(tweet).reply_prefix + text)
+    end
   end
 
   def on_favorite(user, tweet)
