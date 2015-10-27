@@ -47,7 +47,8 @@ class MyBot < Ebooks::Bot
     model = Ebooks::Model.load("model/tweets.model")
     unless tweet.text.include?("@") # we don't want to take part at other conversations
       text = model.make_response(tweet.text, 130)
-      reply(tweet, meta(tweet).reply_prefix + text)
+      # reply(tweet, meta(tweet).reply_prefix + text)
+      tweet(meta(tweet).reply_prefix + text) # to not show up in the replies
     end
   end
 
